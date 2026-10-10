@@ -4,47 +4,47 @@ import android.content.Context
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.drx.casefiles.R
+import com.drx.casefiles.R as AppR
 
 enum class Category(@StringRes val label: Int) {
-    CLINICAL(R.string.cat_clinical),
-    XRAY(R.string.cat_xray),
-    MRI(R.string.cat_mri),
-    CT(R.string.cat_ct),
-    ECHO(R.string.cat_echo),
-    LAB(R.string.cat_lab),
-    REPORT(R.string.cat_report)
+    CLINICAL(AppR.string.cat_clinical),
+    XRAY(AppR.string.cat_xray),
+    MRI(AppR.string.cat_mri),
+    CT(AppR.string.cat_ct),
+    ECHO(AppR.string.cat_echo),
+    LAB(AppR.string.cat_lab),
+    REPORT(AppR.string.cat_report)
 }
 
 enum class Side(@StringRes val label: Int) {
-    NONE(R.string.side_none),
-    L(R.string.side_left),
-    R(R.string.side_right)
+    NONE(AppR.string.side_none),
+    L(AppR.string.side_left),
+    R(AppR.string.side_right)
 }
 
 enum class Region(@StringRes val label: Int) {
-    SHOULDER(R.string.r_shoulder), ARM(R.string.r_arm), ELBOW(R.string.r_elbow),
-    FOREARM(R.string.r_forearm), WRIST(R.string.r_wrist), HAND(R.string.r_hand),
-    PELVIS(R.string.r_pelvis), HIP(R.string.r_hip), THIGH(R.string.r_thigh),
-    KNEE(R.string.r_knee), LEG(R.string.r_leg), ANKLE(R.string.r_ankle),
-    FOOT(R.string.r_foot), SPINE(R.string.r_spine), OTHER(R.string.r_other)
+    SHOULDER(AppR.string.r_shoulder), ARM(AppR.string.r_arm), ELBOW(AppR.string.r_elbow),
+    FOREARM(AppR.string.r_forearm), WRIST(AppR.string.r_wrist), HAND(AppR.string.r_hand),
+    PELVIS(AppR.string.r_pelvis), HIP(AppR.string.r_hip), THIGH(AppR.string.r_thigh),
+    KNEE(AppR.string.r_knee), LEG(AppR.string.r_leg), ANKLE(AppR.string.r_ankle),
+    FOOT(AppR.string.r_foot), SPINE(AppR.string.r_spine), OTHER(AppR.string.r_other)
 }
 
 enum class Stage(@StringRes val label: Int) {
-    BEFORE_REDUCTION(R.string.st_before_reduction),
-    AFTER_REDUCTION(R.string.st_after_reduction),
-    AFTER_CAST(R.string.st_after_cast),
-    PRE_OP(R.string.st_pre_op),
-    POST_OP(R.string.st_post_op),
-    CONTROL_FIXATION(R.string.st_control_fixation)
+    BEFORE_REDUCTION(AppR.string.st_before_reduction),
+    AFTER_REDUCTION(AppR.string.st_after_reduction),
+    AFTER_CAST(AppR.string.st_after_cast),
+    PRE_OP(AppR.string.st_pre_op),
+    POST_OP(AppR.string.st_post_op),
+    CONTROL_FIXATION(AppR.string.st_control_fixation)
 }
 
 enum class ViewPos(@StringRes val label: Int) {
-    AP(R.string.v_ap), LATERAL(R.string.v_lateral), OBLIQUE(R.string.v_oblique),
-    PA(R.string.v_pa), MORTISE(R.string.v_mortise), GRASHEY(R.string.v_grashey),
-    YVIEW(R.string.v_yview), AXILLARY(R.string.v_axillary), ROBERTS(R.string.v_roberts),
-    SKYLINE(R.string.v_skyline), ANTERIOR(R.string.v_anterior), POSTERIOR(R.string.v_posterior),
-    MEDIAL(R.string.v_medial), AXIAL(R.string.v_axial), STRESS(R.string.v_stress)
+    AP(AppR.string.v_ap), LATERAL(AppR.string.v_lateral), OBLIQUE(AppR.string.v_oblique),
+    PA(AppR.string.v_pa), MORTISE(AppR.string.v_mortise), GRASHEY(AppR.string.v_grashey),
+    YVIEW(AppR.string.v_yview), AXILLARY(AppR.string.v_axillary), ROBERTS(AppR.string.v_roberts),
+    SKYLINE(AppR.string.v_skyline), ANTERIOR(AppR.string.v_anterior), POSTERIOR(AppR.string.v_posterior),
+    MEDIAL(AppR.string.v_medial), AXIAL(AppR.string.v_axial), STRESS(AppR.string.v_stress)
 }
 
 inline fun <reified T : Enum<T>> enumOrNull(name: String): T? =
@@ -61,7 +61,7 @@ fun stageText(stage: String): String {
     val s = enumOrNull<Stage>(stage)
     return when {
         s != null -> stringResource(s.label)
-        stage.isBlank() -> stringResource(R.string.stage_none)
+        stage.isBlank() -> stringResource(AppR.string.stage_none)
         else -> stage
     }
 }
@@ -91,9 +91,9 @@ fun visitLabels(ctx: Context, visits: List<Visit>): Map<Long, String> {
         var n = 0
         list.sortedBy { it.date }.forEach { v ->
             out[v.id] = when (v.kind) {
-                "INITIAL" -> ctx.getString(R.string.visit_initial)
-                "FOLLOWUP" -> { n++; ctx.getString(R.string.visit_followup_fmt, n) }
-                else -> v.title.ifBlank { ctx.getString(R.string.visit_followup) }
+                "INITIAL" -> ctx.getString(AppR.string.visit_initial)
+                "FOLLOWUP" -> { n++; ctx.getString(AppR.string.visit_followup_fmt, n) }
+                else -> v.title.ifBlank { ctx.getString(AppR.string.visit_followup) }
             }
         }
     }
